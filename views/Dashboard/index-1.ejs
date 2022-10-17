@@ -1,0 +1,45 @@
+<%- contentFor('HeaderCss') %>
+    <!-- C3 Chart css -->
+    <link href="public/assets/libs/c3/c3.min.css" rel="stylesheet" type="text/css">
+
+<%- contentFor('breadcrumb') %>
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Horizontal Layout</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Layouts</a></li>
+                    <li class="breadcrumb-item active">Horizontal Layout</li>
+                </ol>
+            </div>
+            
+        </div>
+    </div>
+</div>     
+<!-- end page title -->
+
+<%- contentFor('body') %>
+    
+
+
+    
+
+
+   
+
+<%- contentFor('FooterJs') %>
+    <!-- Peity chart-->
+    <script src="public/assets/libs/peity/jquery.peity.min.js"></script>
+
+    <!--C3 Chart-->
+    <script src="public/assets/libs/d3/d3.min.js"></script>
+    <script src="public/assets/libs/c3/c3.min.js"></script>
+
+    <script src="public/assets/libs/jquery-knob/jquery.knob.min.js"></script>
+
+    <script src="public/assets/js/pages/dashboard.init.js"></script>
+
+<%- contentFor('BottomJs') %>

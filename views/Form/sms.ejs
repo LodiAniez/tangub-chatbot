@@ -1,0 +1,165 @@
+<%- contentFor('HeaderCss') %>
+
+<!-- DataTables -->
+<link href="public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="public/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
+<!-- Responsive datatable examples -->
+<link href="public/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="public/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
+<%- contentFor('breadcrumb') %>
+
+<%- contentFor('body') %>
+
+<div class="row">
+        <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">List of SMS</h4>
+
+
+                <!---- --->
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                    <thead>
+                    <tr>
+
+                        <th>Contact No</th>
+                        <th>Inquiry</th>
+                        <th>messageID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+
+
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <%
+                    if(userData.length != 0){
+                        var i = 1;
+                    userData.forEach(function(data){
+                    %>
+                    <tr>
+                      
+
+                        <td><%= data.inquirer_contactno %></td>
+                       <td><script type="text/javascript">
+                                var decodeText1 = decodeURI('<%= data.inquiry %>');
+                                document.write(decodeText1);
+                            </script></td>
+                        <td><%= data.messageID %></td>
+                        <td>
+                            <script type="text/javascript">
+
+                                var ts = <%= data.date_time%>;
+
+                                // convert unix timestamp to milliseconds
+                                var ts_ms = <%= data.date_time%>;
+
+                                // initialize new Date object
+                                var date_ob = new Date(ts_ms);
+
+                                // year as 4 digits (YYYY)
+                                var year = date_ob.getFullYear();
+
+                                // month as 2 digits (MM)
+                                var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+                                // date as 2 digits (DD)
+                                var date = ("0" + date_ob.getDate()).slice(-2);
+
+                                // hours as 2 digits (hh)
+                                var hours = ("0" + date_ob.getHours()).slice(-2);
+
+                                // minutes as 2 digits (mm)
+                                var minutes = ("0" + date_ob.getMinutes()).slice(-2);
+
+                                // seconds as 2 digits (ss)
+                                var seconds = ("0" + date_ob.getSeconds()).slice(-2);
+
+                                // date as YYYY-MM-DD format
+                                //console.log("Date as YYYY-MM-DD Format: " + year + "-" + month + "-" + date);
+                                //console.log("Time as hh:mm Format: " + hours + ":" + minutes);
+                               // console.log("Date as YYYY-MM-DD hh:mm:ss Format: " + year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
+
+                                document.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
+                            </script>
+                        </td>
+                        <td><script type="text/javascript">
+                                var inqstatus = <%= data.inquirystatus %>;
+                                if (inqstatus==0){
+
+                                }else{
+                                    document.write("Answered");
+                                }
+
+                            </script></td>
+
+
+
+                    </tr>
+                    <script type="application/javascript">
+
+                        document.getElementById("deleteevent<%= data.conversion_id %>").onclick = function () {
+                            /* do something */
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#4ac18e",
+                                cancelButtonColor: "#f46a6a",
+                                confirmButtonText: "Yes, delete it!"
+                            }).then(function (result) {
+                                if (result.value) {
+                                    Swal.fire("Deleted!", "Your record has been deleted.", "success");
+                                    window.location.href = '/sms';
+                                }
+                            });
+
+                        };
+
+
+                    </script>
+                    <% i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+
+                <!---- --->
+            </div>
+        </div>
+    </div>
+</div>
+<%- contentFor('FooterJs') %>
+
+<!-- Required datatable js -->
+<script src="public/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="public/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="public/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="public/assets/libs/jszip/jszip.min.js"></script>
+<script src="public/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="public/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="public/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="public/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- Sweet Alerts js -->
+<script src="public/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- Sweet alert init js-->
+<script src="public/assets/js/pages/sweetalert.init.js"></script>
+<!-- Datatable init js -->
+<script src="public/assets/js/pages/datatables.init.js"></script>
+<%- contentFor('BottomJs') %>

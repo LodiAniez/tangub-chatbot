@@ -1,0 +1,3 @@
+id_studschoolno,student_password,student_fname,student_lname,student_PSID,student_dept,student_status,student_contactno,student_course,student_yearlevel,otp
+123-4567,nms,Testing,User,,SICT,0,09300344555,BSAM,1st,
+2020-2020,nmsc,Admin,Admin,,BSAM,0,09300344555,BSHM,2nd,

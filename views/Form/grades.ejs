@@ -1,0 +1,51 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Plugins css -->
+    
+     <link href="public/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<%- contentFor('breadcrumb') %>
+
+<%- contentFor('body') %>
+                        
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Grades</h4>
+                    <p class="card-title-desc">Upload grades in CSV Format
+                    </p>
+
+                    <div class="mb-5">
+                        <form id="myForm" action="/import-csv" method="POST" enctype="multipart/form-data" >
+                            <div class="fallback">
+                               <input
+          type="file"
+          class="form-control"
+          name="import-csv"
+          accept="csv"
+        />
+                            </div>
+                     
+                       
+                    </div>
+
+                    <div class="text-center mt-3">
+                     
+<button type="button" class="btn btn-primary waves-effect waves-light" id="sa-position">Import Grades</button>
+                    </div>
+ </form>
+
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+<%- contentFor('FooterJs') %>
+ <!-- Plugins js -->
+  <!-- Sweet Alerts js -->
+                <script src="public/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+                <!-- Sweet alert init js-->
+                <script src="public/assets/js/pages/sweetalert.init.js"></script>
+
+<%- contentFor('BottomJs') %>

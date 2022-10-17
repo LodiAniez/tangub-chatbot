@@ -1,0 +1,149 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Plugins css -->
+    
+     <link href="public/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<%- contentFor('breadcrumb') %>
+
+<%- contentFor('body') %>
+                        
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Students</h4>
+                    <p class="card-title-desc">Upload students in CSV Format
+                    </p>
+
+                    <div class="mb-5">
+                        <form id="myForm" action="/import-csv3" method="POST" enctype="multipart/form-data">
+                            <div class="fallback">
+                               <input
+                                 type="file"
+                                 class="form-control"
+                                 name="import-csv"
+                                 accept="csv"
+                                  />
+                            </div>
+                     
+                       
+                    </div>
+
+                    <div class="text-center mt-2">
+                     
+<button type="button" class="btn btn-primary waves-effect waves-light" id="sa-position">Import Students</button>
+                    </div>
+ </form>
+
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+
+<div class="row">
+        <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">List of Registered Students</h4> <br>
+
+
+                <!---- --->
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                    <thead>
+                    <tr>
+
+                        <th>ID No</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>PSID</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Contact No</th>
+                        <th>Course</th>
+                        <th>Year Level</th>
+                        <th>OTP</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <%
+                    if(userData.length != 0){
+                        var i = 1;
+                    userData.forEach(function(data){
+                    %>
+                    <tr>
+                        <td><%= data.id_studschoolno %></td>
+                        <td><%= data.student_fname %></td>
+                        <td><%= data.student_lname%></td>
+                        <td><%= data.student_PSID%></td>
+                        <td><%= data.student_dept %></td>
+                        <td><script type="text/javascript">
+                                var inqstatus = <%= data.student_status%>;
+                                if (inqstatus==0){
+                                     document.write("Inactive");
+                                }else{
+                                    document.write("Active");
+                                }
+
+                            </script></td>
+                        <td><%= data.student_contactno %></td>
+                        <td><%= data.student_course%></td>
+                        <td><%= data.student_yearlevel%></td>
+                        <td><%= data.otp %></td>                     
+
+                      
+
+                    </tr>
+                    <script type="application/javascript">
+
+                        document.getElementById("deleteevent<%= data.conversion_id %>").onclick = function () {
+                            /* do something */
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#4ac18e",
+                                cancelButtonColor: "#f46a6a",
+                                confirmButtonText: "Yes, delete it!"
+                            }).then(function (result) {
+                                if (result.value) {
+                                    Swal.fire("Deleted!", "Your record has been deleted.", "success");
+                                    window.location.href = '/unhandle';
+                                }
+                            });
+
+                        };
+
+
+                    </script>
+                    <% i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+
+                <!---- --->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- contentFor('FooterJs') %>
+ <!-- Plugins js -->
+  <!-- Sweet Alerts js -->
+                <script src="public/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+                <!-- Sweet alert init js-->
+                <script src="public/assets/js/pages/sweetalert.init.js"></script>
+
+<%- contentFor('BottomJs') %>

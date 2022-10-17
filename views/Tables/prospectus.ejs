@@ -1,0 +1,239 @@
+<%- contentFor('HeaderCss') %>
+
+<!-- DataTables -->
+<link href="public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="public/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
+<!-- Responsive datatable examples -->
+<link href="public/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="public/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<%- contentFor('breadcrumb') %>
+
+<%- contentFor('body') %>
+
+<div class="row">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Add New Prospectus</h4>
+                    <p class="card-title-desc">Upload prospectus in PDF Format
+                    </p>
+<form id="myFormProspectus" action="/upload" method="POST" enctype="multipart/form-data" >
+<div class="row"> 
+<div class="col-3">
+<label class="col-sm-4 col-form-label">Department</label>
+                        <div class="col-sm-12">
+                            <select name="studentdeptname" id="studentdeptname" class="form-select" aria-label="studentdeptname">
+
+ <option value="" selected="selected">Please Select</option>
+                               
+                                </select>
+                        </div>
+</div>
+
+<div class="col-3"> 
+  <label class="col-sm-4 col-form-label">Course</label>
+                        <div class="col-sm-12">
+                            <select name="studentcourse" id="studentcourse" class="form-select" aria-label="studentcourse">
+ <option value="" selected="selected">Please Select a Course</option>
+                               
+                                </select>
+                        </div>                     
+</div>
+<div class="col-6"> 
+
+<label class="col-sm-4 col-form-label">File</label>
+                        <div class="col-sm-12">
+                           <form id="myFormProspectus" action="/upload" method="POST" enctype="multipart/form-data" >
+                            <div class="fallback">
+                               <input  type="file" class="form-control"  name="uploadprospectus" accept="pdf" />
+<button type="button" class="btn btn-primary waves-effect waves-light" id="prospectusbtn">Upload PDF</button>
+                            </div>
+ </form>
+
+
+ 
+                        </div> 
+</div>
+            
+</div>
+
+</div> 
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">List of Prospectus</h4>
+                
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                    <thead>
+                    <tr>
+                       <th>ID</th>
+                        <th>Department</th>
+                        <th>Course</th>
+                        <th>File</th>
+                        <th>Action</th>
+                       
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <%
+        if(userData.length!=0){
+        var i=1; 
+        userData.forEach(function(data){
+        %>
+        <tr>
+            <td><%=i; %></td> <!--  <td><%=data.prospectusID%></td> -->
+           
+            <td><%=data.department%></td>
+            <td><%=data.course%></td>
+
+            <td><a href="/prospectus/download/<%=data.prospectusID%>" ><%=data.filename%></a></td>
+            <td><a href="/prospectus/delete/<%=data.prospectusID%>" <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" id="deleteprospectus<%=data.prospectusID%>">Delete</button></a></td> 
+
+
+        </tr>
+
+<script type="application/javascript">
+
+document.getElementById("deleteprospectus<%=data.prospectusID%>").onclick = function() {
+Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#4ac18e",
+                cancelButtonColor: "#f46a6a",
+                confirmButtonText: "Yes, delete it!"
+              }).then(function (result) {
+                if (result.value) {
+                  Swal.fire("Deleted!", "Your file has been deleted.", "success");
+             window.location.href = '/prospectus';
+                }
+            });
+
+};
+
+
+</script>
+        <%  i++; }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Prospectus Found</td>
+            </tr>
+        <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+<%- contentFor('FooterJs') %>
+
+<!-- Required datatable js -->
+
+<script>
+var subjectObject = {
+  "STE": {
+    "BEEd": [""],
+    "BSEd Mathematics": [""],
+    "BSEd Science": [""],
+    "BTVTEd Automotive Technology": [""],
+    "BTVTEd Electronics Technology": [""],
+    "BTVTEd Electrical Technology": [""],
+    "BTVTEd Civil and Construction Technology": [""],
+    "BTVTEd Welding and Fabrication Technology": [""],
+    "BTVTEd Food and Service Management": [""],
+    "BTVTEd Computer Hardware Servicing": [""],
+    "BTVTEd Animal Production": [""],
+    "BTVTEd Agricultural Crops Production": [""]                
+  },
+  "SICT": {
+    "BSIT": [""],
+    "BSIS": [""],
+    "BSCT": [""],
+    "BSAM": [""]
+  },
+  "SAES": {
+    "BS Agriculture Crop Science": [""],
+    "BS Agriculture Animal Science": [""],
+    "BS Environmental Science": [""]
+  },
+  "SET": {
+    "BSIT Automotive Technology": [""],
+    "BSIT Civil Technology": [""],
+    "BSIT Food Technology": [""],
+    "BSIT Electronics Technology": [""],
+    "BSIT Electrical Technology": [""],
+    "BET Electrical Engineering Technology": [""],
+    "BET Electronics Engineering Technology": [""],
+    "BET Mechanical Engineering Technology": [""],
+    "BET Construction Engineering Technology": [""]
+  },
+  "SBAM": {
+    "BSHM": [""],
+    "BSTM": [""]
+  },
+  "SAS": {
+    "BS Mathematics": [""],
+    "BS Biology": [""],
+    "BA Political Science": [""],
+    "BA Literature": [""],
+    "BS English Language Studies": [""]
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("studentdeptname");
+  var topicSel = document.getElementById("studentcourse");
+ 
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+  
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+ 
+}
+</script>
+
+
+<script src="public/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="public/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="public/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="public/assets/libs/jszip/jszip.min.js"></script>
+<script src="public/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="public/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="public/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="public/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="public/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- Sweet Alerts js -->
+ <script src="public/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+ <!-- Sweet alert init js-->
+<script src="public/assets/js/pages/sweetalert.init.js"></script>
+<!-- Datatable init js -->
+<script src="public/assets/js/pages/datatables.init.js"></script> 
+
+<%- contentFor('BottomJs') %>

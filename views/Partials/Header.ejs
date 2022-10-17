@@ -1,0 +1,66 @@
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="/" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="public/assets/images/logo.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="public/assets/images/logo.png" alt="" height="36">
+                    </span>
+                </a>
+
+                <a href="/" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="public/assets/images/logonmsc.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="public/assets/images/logonmsc.png" alt="" height="36">
+                    </span>
+                </a>
+            </div>
+
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <div class="d-none d-sm-block ms-2">
+                <h4 class="page-title"><%- title %></h4>
+            </div>
+        </div>
+
+        <!-- Search input -->
+        <div class="search-wrap" id="search-wrap">
+            <div class="search-bar">
+                <input class="search-input form-control" placeholder="<%=translation.Search%>">
+                <a href="#" class="close-search toggle-search" data-target="#search-wrap">
+                    <i class="mdi mdi-close-circle"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex">
+
+
+            
+
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user" src="public/assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <a class="dropdown-item" href="/admin-profile"><i class="mdi mdi-account-circle"></i><span style="margin-left:7px;"><%=translation.Profile%></span> </a>
+                    
+                    <div class="dropdown-divider"></div>
+                       <a class="dropdown-item text-danger"  id="logoutbtn" href="#"><i class="mdi mdi-logout"></i><span style="margin-left:7px;"><%=translation.Logout%></span> </a>               
+                </div>
+            </div>
+
+           
+
+        </div>
+    </div>
+</header>

@@ -1,0 +1,38 @@
+<script type="application/javascript">
+
+document.getElementById("logoutbtn").onclick = function() {
+Swal.fire({
+                title: "Log out?",
+                text: " Are you sure you want to log out?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#4ac18e",
+                cancelButtonColor: "#f46a6a",
+                confirmButtonText: "Logout"
+              }).then(function (result) {
+                if (result.value) {
+                  
+                  Swal.fire("Logout", "Logging out...", "success");
+                  window.location.href = '/logout';
+                }
+else{
+result.dismiss === Swal.DismissReason.cancel
+}
+            });
+
+};
+
+
+</script>
+
+<!-- JAVASCRIPT -->
+<script src="public/assets/libs/jquery/jquery.min.js"></script>
+<script src="public/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="public/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="public/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="public/assets/libs/node-waves/waves.min.js"></script>
+
+<!-- Sweet Alerts js -->
+ <script src="public/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+ <!-- Sweet alert init js-->
+<script src="public/assets/js/pages/sweetalert.init.js"></script>
