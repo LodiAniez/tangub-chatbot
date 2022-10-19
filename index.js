@@ -19,9 +19,9 @@ var AuthController = require('./controllers/AuthController');
 // import Router file
 var pageRouter = require('./routers/route');
 
-var FB_ACCESS_TOKEN = 'EAAQJ6TWZBAnwBAMMPauQ4pdx9CZBwUZCRFOxHZAGmhmQBU7C5oDnC8ES8nSlQd0iIyzfQVrOvP8UUlB2TZB57JHjtEE1nlxDT4Uj1FhBzvzgQfusJCXrcwJHzbQZCUsZCJITZAcgqCi0I1wFMKcWwZASUX9ZCt6RFqQArfTUcZCvg7VIdhyloYrx8lAqWEfGAxMtCk96QJ4KSJpggZDZD';
-var FB_VERIFY_TOKEN = 'ambotlangjudnimo';
-var FB_APP_SECRET = '4f2d2035df9dd79dbc7c649a6f342509';
+var FB_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
+var FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
+var FB_APP_SECRET = process.env.FB_APP_SECRET;
 
 
 var session = require('express-session');
@@ -34,8 +34,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 
 app.use(session({
-  key: 'studentotp',
-  secret: 'somerandonstuffs',
+  key: process.env.SESSION_KEY,
+  secret: process.env.SESSION_SECRET_1,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -43,7 +43,7 @@ app.use(session({
   }
 }));
 
-app.use(session({ resave: false, saveUninitialized: true, secret: 'nodedemo' }));
+app.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET_2 }));
 app.use(flash());
 app.use(i18n({
   translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
